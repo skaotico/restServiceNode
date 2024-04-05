@@ -7,7 +7,11 @@ import {
     MENSSAGE_TAREA_NO_CREADA,
     MENSSAGE_TAREA_EXISTENTE,
     MENSSAGE_TAREA_NO_ENCONTRADA,
-    MENSSAGE_ERROR_BUSCANDO_TAREA
+    MENSSAGE_ERROR_BUSCANDO_TAREA,
+    APP_MENSSAGE,
+    BD_ERROR_CLAVE_DUPLICADA,
+    ERROR_SERVER,
+    BD_SCHEMA_USUARIO
 } from "../config.js";
 import taskModel from "../models/task.model.js";
 
@@ -26,10 +30,10 @@ export const getTasks = async (req, res) => {
         if (tasks) {
             return res.status(COD_EXITO).json(tasks);
         } else {
-           return  res.status(COD_NO_ENCONTRADO).json({ "message": MENSSAGE_TAREAS_NO_ENCONTRADAS });
+           return  res.status(COD_NO_ENCONTRADO).json({ APP_MENSSAGE: MENSSAGE_TAREAS_NO_ENCONTRADAS });
         }
     } catch (error) {
-        res.status(COD_ERROR).json({ "message": "problemas en el servidor" })
+        res.status(COD_ERROR).json({ APP_MENSSAGE: "problemas en el servidor" })
     }
 
     ;
@@ -43,17 +47,17 @@ export const getTasks = async (req, res) => {
 export const getTaskById = async (req, res) => {
 
     try {
-        const task = await taskModel.findById(req.params.id).populate('user');
+        const task = await taskModel.findById(req.params.id).populate(BD_SCHEMA_USUARIO);
         if (task) {
             res.status(COD_EXITO);
             res.json(task);
         } else {
-            return res.status(COD_NO_ENCONTRADO).json({ "message": MENSSAGE_TAREA_NO_ENCONTRADA });
+            return res.status(COD_NO_ENCONTRADO).json({ APP_MENSSAGE: MENSSAGE_TAREA_NO_ENCONTRADA });
         }
 
     } catch (error) {
         console.error(error);
-        return res.status(COD_ERROR).json({ "message": MENSSAGE_ERROR_BUSCANDO_TAREA });
+        return res.status(COD_ERROR).json({ APP_MENSSAGE: MENSSAGE_ERROR_BUSCANDO_TAREA });
     }
 
 
@@ -71,12 +75,12 @@ export const deleteTask = async (req, res) => {
         if (task) {
             return res.status(COD_EXITO).json(task);
         } else {
-            return res.status(COD_NO_ENCONTRADO).json({ "message": MENSSAGE_TAREA_NO_ENCONTRADA });
+            return res.status(COD_NO_ENCONTRADO).json({ APP_MENSSAGE: MENSSAGE_TAREA_NO_ENCONTRADA });
         }
 
     } catch (error) {
         console.error(error);
-        return res.status(COD_ERROR).json({ "message": MENSSAGE_ERROR_BUSCANDO_TAREA });
+        return res.status(COD_ERROR).json({ APP_MENSSAGE: MENSSAGE_ERROR_BUSCANDO_TAREA });
     }
 
 }
@@ -96,13 +100,13 @@ export const updateTask = async (req, res) => {
             { new: true }
         );
         if (newTask) {
-            return res.status(COD_EXITO).json({ "message": newTask });
+            return res.status(COD_EXITO).json({ APP_MENSSAGE: newTask });
 
         } else {
-            return res.status(COD_ERROR).json({ "message": MENSSAGE_ERROR_TAREA_NO_UPDATE });
+            return res.status(COD_ERROR).json({ APP_MENSSAGE: MENSSAGE_ERROR_TAREA_NO_UPDATE });
         }
     } catch (error) {
-        return res.status(COD_ERROR).json({ "message": MENSSAGE_ERROR_TAREA_NO_UPDATE });
+        return res.status(COD_ERROR).json({ APP_MENSSAGE: MENSSAGE_ERROR_TAREA_NO_UPDATE });
     }
 
 
@@ -129,17 +133,17 @@ export const createTask = async (req, res) => {
         if (saveTask) {
             return res.status(COD_EXITO).json(saveTask);
         } else {
-           return  res.status(COD_NO_ENCONTRADO).json({ "message": MENSSAGE_TAREA_NO_CREADA });
+           return  res.status(COD_NO_ENCONTRADO).json({ APP_MENSSAGE: MENSSAGE_TAREA_NO_CREADA });
         }
 
     } catch (error) {
         console.log(error);
-        if (error.toString().indexOf("E11000")) {
+        if (error.toString().indexOf(BD_ERROR_CLAVE_DUPLICADA)) {
             res.status(COD_ERROR);
-            res.json({ "message": MENSSAGE_TAREA_EXISTENTE });
+            res.json({ APP_MENSSAGE: MENSSAGE_TAREA_EXISTENTE });
         } else {
             res.status(COD_ERROR);
-            res.json({ "message": "problemas en el servidor" });
+            res.json({ APP_MENSSAGE:ERROR_SERVER});
         }
 
     }

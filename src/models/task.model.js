@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { BD_SCHEMA_USUARIO,BD_SHEMA_TASK } from "../config.js";
  
 
 const taskSchema = new mongoose.Schema({
@@ -20,7 +21,7 @@ const taskSchema = new mongoose.Schema({
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
+        ref:BD_SCHEMA_USUARIO,
         require: true,
     }
 
@@ -29,4 +30,4 @@ const taskSchema = new mongoose.Schema({
     timestamps: true
 });
 
-export default mongoose.model('task', taskSchema);
+export default mongoose.model(BD_SHEMA_TASK, taskSchema);
