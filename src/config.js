@@ -27,6 +27,8 @@ export const MENSSAGE_EXITO_CREATE_USER = "exito al crear el usuario";
 export const MENSSAGE_ERROR_CREATE_USER = "error al crear el ususario";
 export const MENSSAGE_ERROR_LOGIN = "error con las credenciales";
 export const MENSSAGE_ERROR_USUARIO_NO_ENCOTRADO = "usuario no encontrado";
+export const MESSAGE_LOGOUT = "session terminada";
+export const VACIO = "";
 
 
 /*
@@ -40,12 +42,14 @@ export const MENSSAGE_ERROR_BUSCANDO_TAREA="error al buscar la tarea";
 export const MENSSAGE_ERROR_TAREA_NO_UPDATE = "error al updetear la tarea";
 
 
+
 /*
     errores comunes 
 */
 export const ERROR_SERVER = "error al ejecutar la consula en el servidor";
 export const ERROR_TOKEN_INVALIDO = "token invalido";
 export const ERROR_TOKEN_NO_INGRESADO = "Token no ingresado,Acceso denegado";
+
 
 /*
     codigos de error
@@ -63,7 +67,8 @@ export const COD_ERROR = 500;
 
 export const APP_TOKEN = "token";
 export const APP_MENSSAGE = "menssage";
-export const APP_TOKEN_SECRET = 'secreto123'
+export const APP_TOKEN_SECRET = 'secreto123';
+
 
 
 /*

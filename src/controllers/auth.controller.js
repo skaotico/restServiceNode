@@ -9,12 +9,19 @@ import {
     MENSSAGE_ERROR_LOGIN,
     APP_TOKEN,
     APP_MENSSAGE,
-    MENSSAGE_ERROR_USUARIO_NO_ENCOTRADO
+    MENSSAGE_ERROR_USUARIO_NO_ENCOTRADO,
+    MESSAGE_LOGOUT,
+    VACIO
 } from "../config.js";
 
 
 
-
+/*
+    metodo encargado de crear un nuevo usuario
+    @Param --> JSON{ email, userName, password}
+    @return --> JSON{email, userName, _id }
+    @Error --> JSON{mensage de error}
+*/
 export const registro = async (req, res) => {
     const { email, userName, password } = req.body;
     const passEncript = await bcrypt.hash(password, 10);
@@ -39,6 +46,12 @@ export const registro = async (req, res) => {
 }
 
 
+/*
+    metodo encargado de crear un nuevo usuario
+    @Param --> JSON{ email, password}
+    @return --> JSON{email, userName, _id }
+    @Error --> JSON{mensage de error}
+*/
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -76,10 +89,16 @@ export const login = async (req, res) => {
     }
 }
 
+/*
+    metodo encargado de generar el logout de la app, eliminando el token de session
+    @Param --> 
+    @return --> JSON{mensage de exito}
+    @Error --> JSON{mensage de error}
+*/
 export const logout =  (req,res) =>{
-    res.cookie("token","",{expires:new Date(0)});
+    res.cookie(APP_TOKEN,VACIO,{expires:new Date(0)});
     res.status(COD_EXITO);
-    res.json({"menssage":"logout completo"});
+    res.json({APP_MENSSAGE:MESSAGE_LOGOUT});
 }
 
 export const profile =  async (req,res)=>{
