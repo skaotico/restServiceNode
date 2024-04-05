@@ -52,12 +52,31 @@ export const ERROR_TOKEN_NO_INGRESADO = "Token no ingresado,Acceso denegado";
 
 
 /*
+    Mensajes de errror para ZOD validaciones de estructura de datos
+
+*/
+export const ERROR_USERNAME_REQUERIDO  ="userName es requerido";
+export const ERROR_USERNAME_MIN_LARGO = "userName debe de contener 5 carracteres como minumo";
+export const ERROR_USERNAME_MAX_LARGO  ="username debe de contaner 10 caracteres como maximo";
+export const ERROR_EMAIL_REQUERIDO  ="email es requerido";
+export const ERROR_EMAIL_FORMATO = "email no contiene un formato valido";
+export const ERROR_PASS_REQUERIDO = "password es requerido";
+export const ERROR_PASS_MIN_LARGO = "password debe de contar con 5 caracteres como minimo";
+export const ERROR_PASS_MAX_LARGO ="password debe de contar con 10 caracteres como maximo";
+
+
+
+export const CANTIDAD_MINIMA_CARACTERES_USERNAME = 5;
+export const CANTIDAD_MAXIMA_CARACTERES_USERNAME = 10;
+export const CANTIDAD_MINIMA_CARACTERES_PASS = 5;
+export const CANTIDAD_MAXIMA_CARACTERES_PASS = 15;
+/*
     codigos de error
 */
 export const COD_ERROR_CREATE_USER = 500;
 export const COD_EXITO = 200;
 export const COD_NO_ENCONTRADO = 200;
-export const COD_ERROR = 500;
+export const COD_ERROR = 400;
 
 
 
